@@ -1,2 +1,2 @@
-src/public/css/* linguist-vendored
-src/public/js/* linguist-vendored
+* linguist-vendored
+*.js linguist-vendored=false
