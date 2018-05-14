@@ -2,7 +2,7 @@
   "name": "user-managment",
   "version": "1.0.0",
   "description": "This is just a simple user managment system in Node Js with Express Js",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,10 +25,15 @@
   },
   "homepage": "https://github.com/JoanVasquez/node-js-express-js-user-managment#readme",
   "dependencies": {
+    "bcrypt-node": "^0.1.0",
     "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
     "ejs": "^2.6.1",
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
     "express-validator": "^5.2.0",
-    "mysql": "^2.15.0"
+    "mysql": "^2.15.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   }
 }
