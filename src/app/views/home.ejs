@@ -2,8 +2,41 @@
 <html>
 <head>
 	<title>Home</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
 </head>
 <body>
-	<h1><%= user.user_name %></h1>
+	<div class="container-fluid">
+		<a href="/logout" type="button" class="btn btn-success">Logout</a>
+		<a href="/delete" type="button" class="btn btn-danger">Delete User</a>
+		<div class="row">
+
+			<div class="col-sm-12">
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Full Name</th>
+							<th scope="col">Email</th>
+							<th scope="col">Password</th>
+							<th scope="col">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% if (typeof users != 'undefined' ) { %>
+							<% for (var i =0; i < users.length; i++) { %>
+								<tr>
+									<th><%= users[i].user_id %></th>
+									<td><%= users[i].user_name %></td>
+									<td><%= users[i].user_email %></td>
+									<td><%= users[i].user_pass %></td>
+									<td><a href="javascript:void(0);" class="btn btn-primary">Edit</a></td>
+								</tr>
+							<% } %>
+						<% } %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </body>
 </html>

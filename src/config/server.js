@@ -5,6 +5,7 @@ const session = require('express-session');
 const cookieParse = require('cookie-parser');
 const expressValidator = require('express-validator');
 const passport = require('passport');
+const flash = require('connect-flash');
 
 const app = express();
 
@@ -24,13 +25,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
 app.use(express.static(path.join(__dirname, '../public')));
-
-
-/*
-app.use(session({
-	secret: 'mysecretsessionkey',
-	21 1:01
-}));*/ 
 
 module.exports = app;
