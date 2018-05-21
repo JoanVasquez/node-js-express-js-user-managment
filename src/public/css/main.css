@@ -1,0 +1,47 @@
+.main-section{
+	border:1px solid #138496;
+	background-color: #fff;
+}
+.profile-header{
+	background-color: #17a2b8;
+	height:100px;
+	position: absolute;
+}
+.user-detail{
+	margin: 50px 0px 30px 0px;
+}
+.user-detail img{
+	height:100px;
+	width:100px;
+}
+.user-detail h5{
+	margin:15px 0px 5px 0px;
+}
+
+.imaginary_container{
+    margin-top:5%; /* Don't copy this */
+}
+.stylish-input-group .input-group-addon{
+    background: white !important;
+}
+.stylish-input-group .form-control{
+	border-right:0;
+	box-shadow:0 0 0;
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.disabled {
+    pointer-events: none;
+}

@@ -1,59 +1,43 @@
+const express = require('express');
+const router = express.Router();
 const userDao = require('../../config/database/dao/userDao');
 const passport = require('passport');
+
 userDao.signInAndSignUp(passport);
 
-module.exports = app => {
-	app.get('/', (req, res) => {
-		if(req.user){
-			res.redirect('/home');
-			console.log(req.user);
-		}else{
-			let action = req.query.action;
-			if(action == 'register') {
-				res.render('index', {
-					showRegister: true,
-					message: req.flash('error_message')
-				});
-			} else {
-				res.render('index', {
-					showLogin: true,
-					message: req.flash('error_message')
-				});
-			}
-		}
-	});
-
-	app.post('/signUp',  passport.authenticate('local.signup', {
-		successRedirect: '/home',
-		failureRedirect: '/',
-		failureFlash: true
-	}));
-
-	app.post('/signIn', passport.authenticate('local.signin', {
-		successRedirect: '/home',
-		failureRedirect: '/',
-		failureFlash: true
-	}));
-
-	app.get('/home', isLoggedIn, (req, res) => {
-		userDao.readAllUsers().then((result) => {
-			res.render('home', {
-				users: result
-			});
-		}).catch((errorMessage) => {
-			console.log(errorMessage);
+// LORGIN ROUTE - GET
+router.get('/login', (req, res) => {
+	if(req.user) res.redirect('/profile');
+	else {
+		res.render('user', {
+			showLogin: true,
+			message: req.flash('error_message')
 		});
-	});
+	}
+});
 
-	app.get('/logout', (req, res) => {
-		req.logout();
-        res.redirect('/');
-	});
+//REGISTER ROUTE - GET
+router.get('/register', (req, res) => {
+	if(req.user) res.redirect('/profile');
+	else {
+		res.render('user', {
+			showRegister: true,
+			message: req.flash('error_message')
+		});
+	}
+});
 
+//REGISTER ROUTE - POST
+router.post('/register', passport.authenticate('local.signup', {
+	successRedirect: '/profile',
+	failureRedirect: '/user/register',
+	failureFlash: true
+}));
 
-}
+router.post('/login', passport.authenticate('local.signin', {
+	successRedirect: '/profile',
+	failureRedirect: '/',
+	failureFlash: true
+}));
 
-const isLoggedIn = (req, res, next) => {
-	if(req.isAuthenticated()) return next();
-	res.redirect('/');
-}
+module.exports = router;

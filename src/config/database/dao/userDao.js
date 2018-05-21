@@ -2,7 +2,7 @@ const dbConnection = require('../dbConnection');
 const queries = require('../queries/queries');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
-const dataValidation = require('../../dataValidation');
+//const dataValidation = require('../../dataValidation');
 
 const connection = dbConnection();
 
@@ -35,8 +35,8 @@ const signInAndSignUp = passport => {
 		passwordField: 'user_pass',
 		passReqToCallback: true
 	}, (req, email, pass, done) => {
-		let validationErrors = dataValidation.signUpValidation(req);
-		if (validationErrors) return done(validationErrors);
+		/*let validationErrors = dataValidation.signUpValidation(req);
+		if (validationErrors) return done(validationErrors);*/
 
 		connection.query(queries.sign_in_user, [email], (err, res) => {
 			if (err) done(null, false, req.flash('error_message', 'Error in the server!'));
