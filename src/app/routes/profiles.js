@@ -25,13 +25,16 @@ router.get('/logout', (req, res) => {
 
 //USER UPDATE - POST
 router.post('/update', (req, res) => {
-  console.log(req.body)
   let user = {
+    user_id : req.body.user_id,
     user_name: req.body.user_name,
-    user_email: req.body.user_email,
     user_pass: req.body.user_pass
   }
-  console.log(user);
+  userDao.updateUser(user).then((result) => {
+    console.log(result);
+  }).catch((errorMsg) => {
+    console.log(errorMsg);
+  });
 });
 
 module.exports = router;

@@ -86,7 +86,21 @@ const signInAndSignUp = passport => {
 //UPDATE ANY USER
 const updateUser = user => {
 	return new Promise((resolve, reject) => {
-
+		connection.query(queries.sign_in_user, [user.user_email], (err, res) => {
+			if (err) reject('Error in the server!');
+			else if(res.length) reject('That email is already taken.');
+			bcrypt.genSalt(10, (err, salt) => {
+				if (err) reject('Error in the server!');
+				bcrypt.hash(user.user_pass, salt, (err, hash) => {
+					if (err) reject('Error in the server!');
+					connection.query(queries.update_user, [user.user_name, hash, user.user_id], (err, res) => {
+						console.log('On Save', err);
+						if (err) reject('Error in the server!');
+						else resolve(JSON.stringify(res));
+					});
+				});
+			});
+		});
 	});
 }
 

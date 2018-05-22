@@ -34,7 +34,10 @@ router.post('/register', passport.authenticate('local.signup', {
 	failureFlash: true
 }));
 
-router.post('/login', passport.authenticate('local.signin', {
+router.post('/login', (req, res, next) => {
+	console.log('heyyyy');
+	next();
+}, passport.authenticate('local.signin', {
 	successRedirect: '/profile',
 	failureRedirect: '/',
 	failureFlash: true
