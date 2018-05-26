@@ -72,10 +72,10 @@ const signInAndSignUp = passport => {
 			var user = JSON.parse(JSON.stringify(res))[0];
 
 			if (err) done(null, false, req.flash('error_message', 'Error in the server!'));
-			if (!res.length) return done(null, false, req.flash('error_message', 'No user found.'));
+			if (!res.length) return done(null, false, req.flash('error_message', 'User not found.'));
 			bcrypt.compare(pass, user.user_pass, (err, res) => {
 				if (err) done(null, false, req.flash('error_message', 'Error in the server!'));
-				if (res == true) return done(null, user);
+				if (res) return done(null, user);
 				return done(null, false, req.flash('error_message', 'Oops! Wrong password.'));
 			});
 		});
@@ -94,7 +94,6 @@ const updateUser = user => {
 				bcrypt.hash(user.user_pass, salt, (err, hash) => {
 					if (err) reject('Error in the server!');
 					connection.query(queries.update_user, [user.user_name, hash, user.user_id], (err, res) => {
-						console.log('On Save', err);
 						if (err) reject('Error in the server!');
 						else resolve(JSON.stringify(res));
 					});
@@ -106,7 +105,10 @@ const updateUser = user => {
 
 const deleteUser = userId => {
 	return new Promise((resolve, reject) => {
-
+		connection.query(queries.delete_user, [userId], (err, res) => {
+			if (err) reject('Error in the server!');
+			else resolve(JSON.stringify(res));
+		});
 	});
 }
 

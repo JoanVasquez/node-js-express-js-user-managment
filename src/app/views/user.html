@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Welcome to User Managment System</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/index.css">
+	<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+</head>
+<body>
+
+{{#if daoError}}
+	<div class="alert alert-danger alert-dismissible fade show">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p><strong><i class="fas fa-exclamation-circle"></i></strong> {{daoError}}</p>
+	</div>
+{{/if}}
+
+{{#if isUserDeleted}}
+	<div class="alert alert-success alert-dismissible fade show">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<p><strong><i class="fas fa-exclamation-circle"></i></strong> {{isUserDeleted}}</p>
+	</div>
+{{/if}}
+
+{{#if errors}}
+	<div class="alert alert-danger alert-dismissible fade show">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+			{{#each errors}}
+				<p><strong><i class="fas fa-exclamation-circle"></i> {{this.param}}</strong> - {{this.msg}}</p>
+			{{/each}}
+	</div>
+{{/if}}
+	<div class="container">
+		<header>
+			<h1>Login and Registration Form</h1>
+		</header>
+		<div id="container_demo">
+			<div id="wrapper">
+				{{#if showLogin}}
+				<div id="login" class="animate form">
+					<form action="/user/login" autocomplete="on" method="POST">
+						<h1>Log in</h1>
+						<p>
+							<label for="user-email-sign-in"> Your Email</label>
+							<input id="user-email-sign-in" name="user_email" required="required" type="email" value="{{formData.user_email}}" placeholder="example@example.com"/>
+						</p>
+						<p>
+							<label for="user-password-sign-in"> Your password </label>
+							<input id="user-password-sign-in" name="user_pass" required="required" type="password" value="{{formData.user_pass}}" placeholder="eg. X8df!90EO" />
+						</p>
+						<p class="keeplogin">
+							<input type="checkbox" name="loginkeeping" id="loginkeeping" value="loginkeeping" />
+							<label for="loginkeeping">Keep me logged in</label>
+						</p>
+						<p class="signin button">
+							<input type="submit" value="Sign In"/>
+						</p>
+						<p class="change_link">
+							Not a member yet ?
+							<a href="/user/register" class="to_register">Join us</a>
+						</p>
+					</form>
+				</div>
+				{{/if}}
+
+				{{#if showRegister}}
+				<div id="register" class="animate form">
+					<form  action="/user/register" autocomplete="on" method="POST">
+						<h1> Sign up </h1>
+						<p>
+							<label for="user-name-sign-up">Your username</label>
+							<input id="user-name-sign-up" name="user_name" required="required" type="text" value="{{formData.user_name}}" placeholder="Your whole name" />
+						</p>
+						<p>
+							<label for="user-email-sign-up"> Your email</label>
+							<input id="user-email-sign-up" name="user_email" required="required" type="email" value="{{formData.user_email}}" placeholder="Your Email"/>
+						</p>
+						<p>
+							<label for="user-password-sign-up">Your password </label>
+							<input id="user-password-sign-up" name="user_pass" required="required" type="password" value="{{formData.user_pass}}" placeholder="Your password"/>
+						</p>
+						<p class="signin button">
+							<input type="submit" value="Sign up"/>
+						</p>
+						<p class="change_link">
+							Already a member ?
+							<a href="/user/login" class="to_register"> Go and log in </a>
+						</p>
+					</form>
+				</div>
+				{{/if}}
+			</div>
+		</div>
+	</div>
+
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
