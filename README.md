@@ -45,14 +45,10 @@ Remember to make **npm i or npm install** in the root of the app to install the 
 ```
 
 #### Demonstration
-![Login Session](/login.png)
-Login session
+![Login](https://raw.githubusercontent.com/JoanVasquez/node-js-express-js-user-managment/master/login.PNG)
 
-![Register Session](/register.png)
-Register session
+![Register](https://raw.githubusercontent.com/JoanVasquez/node-js-express-js-user-managment/master/register.PNG)
 
-![Profile Session](/profile.png)
-Profile session
+![Profile](https://raw.githubusercontent.com/JoanVasquez/node-js-express-js-user-managment/master/profile.PNG)
 
-![Update Session](/update.png)
-Update session
+![Update](https://raw.githubusercontent.com/JoanVasquez/node-js-express-js-user-managment/master/update.PNG)
